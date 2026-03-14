@@ -1,136 +1,317 @@
-I am building a professional luxury bridal salon website called "Bride Villa Salon".
+/* ===============================
+   BRIDE VILLA SALON - LUXURY CSS
+================================ */
 
-The project already has the following GitHub file structure:
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
-bride-villa-salon
-│
-├── index.html
-├── services.html
-├── gallery.html
-├── booking.html
-├── style.css
-├── app.js
-└── images/
+/* Root Colors */
 
-Your role: Act as a Senior Front-End Developer, UI/UX Designer, and Luxury Brand Website Specialist.
+:root{
+    --gold:#C6A769;
+    --cream:#FFF8F2;
+    --green:#1F3A2E;
+    --dark:#222;
+}
 
-Your task is to generate complete, clean, production-level code for a modern luxury bridal salon website.
+/* Reset */
 
-IMPORTANT RULES:
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-1. The website must look premium, elegant, and bridal-themed.
-2. The design must be mobile responsive for phone, tablet, and desktop.
-3. Use semantic HTML5, modern CSS3, and clean JavaScript.
-4. The website should look similar in quality to high-end salon websites or wedding studio websites.
-5. The code must be clean, well structured, and ready to upload on GitHub Pages.
+/* Body */
 
-DESIGN STYLE:
+body{
+    font-family:'Montserrat',sans-serif;
+    background:var(--cream);
+    color:var(--dark);
+    line-height:1.6;
+}
 
-• Color palette:
-Champagne Gold (#C6A769)
-Soft Cream (#FFF8F2)
-Deep Green (#1F3A2E)
+/* Headings */
 
-• Typography:
-Headings: Playfair Display
-Body text: Montserrat
+h1,h2,h3,h4{
+    font-family:'Playfair Display',serif;
+}
 
-• Overall feel:
-Luxury, feminine, elegant, bridal studio style.
+/* Links */
 
-WEBSITE REQUIREMENTS:
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-1️⃣ Home Page (index.html)
-Include:
+/* Container */
 
-- Beautiful hero section with bridal background image
-- Navigation bar with logo and menu
-- Call-to-action button "Book Appointment"
-- Featured bridal services section
-- About salon section
-- Testimonials section
-- Gallery preview section
-- Footer with contact info
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
 
-2️⃣ Services Page (services.html)
-Create elegant service cards for:
+/* ===============================
+   NAVBAR
+================================ */
 
-- Bridal Makeup
-- Party Makeup
-- Hair Styling
-- Pre-Bridal Packages
-- Skin Treatment
+header{
+    position:sticky;
+    top:0;
+    background:white;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
 
-Each card should include:
-• image
-• description
-• price placeholder
-• hover animation
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
 
-3️⃣ Gallery Page (gallery.html)
-Create a responsive image gallery using CSS Grid.
+.logo{
+    font-size:26px;
+    font-weight:600;
+    color:var(--green);
+}
 
-Features:
-• bridal makeup photos
-• zoom on hover
-• clean masonry-style layout
+.nav-links{
+    display:flex;
+    gap:30px;
+}
 
-4️⃣ Booking Page (booking.html)
-Create a professional appointment booking form.
+.nav-links a{
+    font-weight:500;
+    transition:0.3s;
+}
 
-Fields:
-• Full Name
-• Phone Number
-• Email
-• Service Selection
-• Date
-• Time
-• Message
+.nav-links a:hover{
+    color:var(--gold);
+}
 
-Include JavaScript validation in app.js.
+/* Hamburger */
 
-5️⃣ CSS (style.css)
+.menu-toggle{
+    display:none;
+    font-size:26px;
+    cursor:pointer;
+}
 
-Include:
+/* ===============================
+   HERO SECTION
+================================ */
 
-• modern layout
-• luxury color scheme
-• smooth hover effects
-• animations
-• responsive design
-• sticky navbar
-• button styles
-• section spacing
-• card designs
+.hero{
+    height:90vh;
+    background:url('images/hero.jpg') center/cover no-repeat;
+    display:flex;
+    align-items:center;
+}
 
-6️⃣ JavaScript (app.js)
+.hero-content{
+    background:rgba(0,0,0,0.35);
+    padding:50px;
+    color:white;
+    max-width:500px;
+}
 
-Include:
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
 
-• mobile hamburger menu
-• sticky navbar on scroll
-• form validation
-• smooth scrolling navigation
-• simple gallery animation
+.hero p{
+    margin-bottom:25px;
+}
 
-7️⃣ WEBSITE MUST INCLUDE:
+/* Button */
 
-• modern hero banner
-• service cards
-• gallery grid
-• booking form
-• responsive navigation
-• professional footer
+.btn{
+    display:inline-block;
+    background:var(--gold);
+    color:white;
+    padding:12px 28px;
+    border-radius:4px;
+    transition:0.3s;
+}
 
-The final result should look like a premium bridal salon website ready for real customers.
+.btn:hover{
+    background:var(--green);
+}
 
-Generate the code file by file in this order:
+/* ===============================
+   SECTION STYLING
+================================ */
 
-1. style.css
-2. index.html
-3. services.html
-4. gallery.html
-5. booking.html
-6. app.js
+section{
+    padding:80px 0;
+}
 
-Make the website visually impressive and professional.
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:34px;
+}
+
+/* ===============================
+   SERVICES
+================================ */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.service-card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    transition:0.4s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+}
+
+.service-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.service-content{
+    padding:20px;
+}
+
+.price{
+    color:var(--gold);
+    font-weight:600;
+    margin-top:10px;
+}
+
+/* ===============================
+   ABOUT
+================================ */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    border-radius:10px;
+}
+
+/* ===============================
+   TESTIMONIALS
+================================ */
+
+.testimonials{
+    background:white;
+}
+
+.testimonial{
+    text-align:center;
+    max-width:700px;
+    margin:auto;
+}
+
+.testimonial p{
+    font-style:italic;
+}
+
+/* ===============================
+   GALLERY
+================================ */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.gallery-grid img{
+    width:100%;
+    border-radius:8px;
+    transition:0.4s;
+}
+
+.gallery-grid img:hover{
+    transform:scale(1.05);
+}
+
+/* ===============================
+   BOOKING FORM
+================================ */
+
+.booking-form{
+    max-width:600px;
+    margin:auto;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:4px;
+}
+
+.booking-form button{
+    width:100%;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+
+footer{
+    background:var(--green);
+    color:white;
+    text-align:center;
+    padding:30px 0;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media(max-width:768px){
+
+.nav-links{
+    position:absolute;
+    right:0;
+    top:70px;
+    background:white;
+    flex-direction:column;
+    width:200px;
+    display:none;
+    padding:20px;
+}
+
+.nav-links.active{
+    display:flex;
+}
+
+.menu-toggle{
+    display:block;
+}
+
+.about{
+    grid-template-columns:1fr;
+}
+
+.hero h1{
+    font-size:36px;
+}
+
+}
