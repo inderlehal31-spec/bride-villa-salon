@@ -1,1 +1,136 @@
+I am building a professional luxury bridal salon website called "Bride Villa Salon".
 
+The project already has the following GitHub file structure:
+
+bride-villa-salon
+│
+├── index.html
+├── services.html
+├── gallery.html
+├── booking.html
+├── style.css
+├── app.js
+└── images/
+
+Your role: Act as a Senior Front-End Developer, UI/UX Designer, and Luxury Brand Website Specialist.
+
+Your task is to generate complete, clean, production-level code for a modern luxury bridal salon website.
+
+IMPORTANT RULES:
+
+1. The website must look premium, elegant, and bridal-themed.
+2. The design must be mobile responsive for phone, tablet, and desktop.
+3. Use semantic HTML5, modern CSS3, and clean JavaScript.
+4. The website should look similar in quality to high-end salon websites or wedding studio websites.
+5. The code must be clean, well structured, and ready to upload on GitHub Pages.
+
+DESIGN STYLE:
+
+• Color palette:
+Champagne Gold (#C6A769)
+Soft Cream (#FFF8F2)
+Deep Green (#1F3A2E)
+
+• Typography:
+Headings: Playfair Display
+Body text: Montserrat
+
+• Overall feel:
+Luxury, feminine, elegant, bridal studio style.
+
+WEBSITE REQUIREMENTS:
+
+1️⃣ Home Page (index.html)
+Include:
+
+- Beautiful hero section with bridal background image
+- Navigation bar with logo and menu
+- Call-to-action button "Book Appointment"
+- Featured bridal services section
+- About salon section
+- Testimonials section
+- Gallery preview section
+- Footer with contact info
+
+2️⃣ Services Page (services.html)
+Create elegant service cards for:
+
+- Bridal Makeup
+- Party Makeup
+- Hair Styling
+- Pre-Bridal Packages
+- Skin Treatment
+
+Each card should include:
+• image
+• description
+• price placeholder
+• hover animation
+
+3️⃣ Gallery Page (gallery.html)
+Create a responsive image gallery using CSS Grid.
+
+Features:
+• bridal makeup photos
+• zoom on hover
+• clean masonry-style layout
+
+4️⃣ Booking Page (booking.html)
+Create a professional appointment booking form.
+
+Fields:
+• Full Name
+• Phone Number
+• Email
+• Service Selection
+• Date
+• Time
+• Message
+
+Include JavaScript validation in app.js.
+
+5️⃣ CSS (style.css)
+
+Include:
+
+• modern layout
+• luxury color scheme
+• smooth hover effects
+• animations
+• responsive design
+• sticky navbar
+• button styles
+• section spacing
+• card designs
+
+6️⃣ JavaScript (app.js)
+
+Include:
+
+• mobile hamburger menu
+• sticky navbar on scroll
+• form validation
+• smooth scrolling navigation
+• simple gallery animation
+
+7️⃣ WEBSITE MUST INCLUDE:
+
+• modern hero banner
+• service cards
+• gallery grid
+• booking form
+• responsive navigation
+• professional footer
+
+The final result should look like a premium bridal salon website ready for real customers.
+
+Generate the code file by file in this order:
+
+1. style.css
+2. index.html
+3. services.html
+4. gallery.html
+5. booking.html
+6. app.js
+
+Make the website visually impressive and professional.
