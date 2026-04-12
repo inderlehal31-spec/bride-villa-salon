@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,8 @@
     <meta name="description" content="Orvexa Studio - Bespoke hair sculpting and architectural grooming sanctuary.">
     <meta property="og:title" content="ORVEXA STUDIO | Private Sanctuary">
     <meta property="og:description" content="Where precision meets luxury. Experience the elite standard of grooming.">
-    <meta property="og:image" content="assets/img/og-preview.jpg"> <meta name="theme-color" content="#0D0D0D">
+    <meta property="og:image" content="assets/img/og-preview.jpg"> 
+    <meta name="theme-color" content="#0D0D0D">
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
@@ -23,11 +24,13 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        body { background: #000; margin: 0; overflow: hidden; }
+        /* Essential Loader CSS - Critical for Performance */
+        body.loading { overflow: hidden !important; }
         .loader {
-            position: fixed; inset: 0; background: #000; z-index: 99999;
+            position: fixed; inset: 0; background: #000; z-index: 999999;
             display: flex; align-items: center; justify-content: center;
             transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            pointer-events: all;
         }
         .loader-logo {
             font-family: 'Playfair Display', serif; color: #D4AF37;
@@ -40,9 +43,7 @@
         }
     </style>
 </head>
-<body class="luxury-theme">
-
-    <div class="cursor"></div>
+<body class="luxury-theme loading"> <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
     <div class="loader" id="main-loader">
