@@ -5,38 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORVEXA STUDIO | The Luxury Standard</title>
     
-    <meta name="description" content="Orvexa Studio - High-end architectural hair sculpting and luxury sanctuary.">
-    <meta name="theme-color" content="#0D0D0D">
+    <meta name="description" content="Orvexa Studio - Bespoke hair sculpting and architectural grooming sanctuary.">
+    <meta property="og:title" content="ORVEXA STUDIO | Private Sanctuary">
+    <meta property="og:description" content="Where precision meets luxury. Experience the elite standard of grooming.">
+    <meta property="og:image" content="assets/img/og-preview.jpg"> <meta name="theme-color" content="#0D0D0D">
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
     <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=100" as="image">
+    <link rel="preload" href="app.js" as="script" crossorigin="anonymous">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
     <link rel="stylesheet" href="style.css">
 
     <style>
-        body { background: #000; margin: 0; }
+        body { background: #000; margin: 0; overflow: hidden; }
         .loader {
             position: fixed; inset: 0; background: #000; z-index: 99999;
             display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
         .loader-logo {
-            font-family: 'Playfair Display', serif; letter-spacing: 12px; 
-            color: #D4AF37; font-size: 2.5rem; text-transform: uppercase;
+            font-family: 'Playfair Display', serif; color: #D4AF37;
+            letter-spacing: 12px; font-size: 2.5rem; text-transform: uppercase;
             animation: pulse 2s ease-in-out infinite;
         }
         @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: scale(0.98); }
+            0%, 100% { opacity: 0.3; transform: scale(0.95); }
             50% { opacity: 1; transform: scale(1); }
-        }
-        .loader-progress-bar {
-            position: absolute; bottom: 0; left: 0; height: 2px;
-            background: #D4AF37; width: 0%; transition: width 1s ease-in-out;
         }
     </style>
 </head>
@@ -45,11 +45,8 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
-    <div class="loader">
-        <div class="loader-wrapper">
-            <h1 class="loader-logo">ORVEXA</h1>
-            <div class="loader-progress-bar"></div>
-        </div>
+    <div class="loader" id="main-loader">
+        <h1 class="loader-logo">ORVEXA</h1>
     </div>
 
     <nav class="navbar">
@@ -63,7 +60,7 @@
                 <li><a href="booking.html" class="nav-cta">Reserve Now</a></li>
             </ul>
 
-            <div class="burger">
+            <div class="burger" id="mobile-menu">
                 <span class="line1"></span>
                 <span class="line2"></span>
             </div>
@@ -81,17 +78,16 @@
 
                 <div class="hero-content" data-aos="zoom-out" data-aos-duration="2500">
                     <h2 class="hero-subtitle">BEYOND GROOMING</h2>
-                    <h1 class="hero-title">Orvexa Studio</h1>
+                    <h1 class="hero-title">Orvexa</h1>
                     <p class="hero-tagline">Architectural precision meets bespoke luxury sanctuary.</p>
                     
                     <div class="hero-btns">
                         <a href="booking.html" class="btn-primary magnetic">Request Invite</a>
-                        <a href="services.html" class="btn-outline magnetic">The Menu</a>
+                        <a href="services.html" class="btn-outline magnetic">The Collection</a>
                     </div>
                 </div>
 
                 <div class="scroll-indicator">
-                    <div class="mouse-icon"><div class="wheel"></div></div>
                     <span>EXPLORE</span>
                 </div>
             </header>
@@ -101,14 +97,14 @@
                     <div class="about-grid">
                         <div class="about-media" data-aos="fade-right">
                             <div class="image-mask">
-                                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80" alt="Orvexa Experience">
+                                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80" alt="Orvexa Studio Craftsmanship">
                             </div>
                         </div>
                         <div class="about-info" data-aos="fade-left">
                             <span class="gold-label">THE LEGACY</span>
                             <h3>Crafting Identities</h3>
-                            <p>We believe in quiet luxury—an uncompromising commitment to detail, privacy, and artistic innovation. At Orvexa, every transformation is an act of creation.</p>
-                            <a href="services.html" class="text-link">The Collection &rarr;</a>
+                            <p>We believe in quiet luxury—an uncompromising commitment to detail, privacy, and artistic innovation. Every transformation is an act of creation.</p>
+                            <a href="services.html" class="text-link">View The Experience &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -118,9 +114,9 @@
                 <div class="footer-wrap">
                     <h2 class="footer-logo">ORVEXA</h2>
                     <nav class="footer-nav">
-                        <a href="services.html">Curation</a>
-                        <a href="gallery.html">Visuals</a>
-                        <a href="booking.html">Privacy Policy</a>
+                        <a href="services.html">Services</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="booking.html">Privacy</a>
                     </nav>
                     <p class="copyright">&copy; 2026 Orvexa Studio. Private Sanctuary.</p>
                 </div>
