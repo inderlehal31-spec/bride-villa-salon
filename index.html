@@ -1,248 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORVEXA STUDIO | The Luxury Standard</title>
+    
+    <meta name="description" content="Orvexa Studio - High-end architectural hair sculpting and luxury sanctuary.">
+    <meta name="theme-color" content="#0D0D0D">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=100" as="image">
 
-<title>Bride Villa Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="style.css">
-
+    <style>
+        body { background: #000; margin: 0; }
+        .loader {
+            position: fixed; inset: 0; background: #000; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .loader-logo {
+            font-family: 'Playfair Display', serif; letter-spacing: 12px; 
+            color: #D4AF37; font-size: 2.5rem; text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        .loader-progress-bar {
+            position: absolute; bottom: 0; left: 0; height: 2px;
+            background: #D4AF37; width: 0%; transition: width 1s ease-in-out;
+        }
+    </style>
 </head>
-
-<body>
-
-<!-- ================= NAVBAR ================= -->
-
-<header>
-
-<div class="container navbar">
-
-<div class="logo">Bride Villa</div>
-
-<nav>
-
-<div class="menu-toggle" id="menu-toggle">
-☰
-</div>
-
-<div class="nav-links" id="nav-links">
-
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="gallery.html">Gallery</a>
-<a href="booking.html">Booking</a>
-
-</div>
-
-</nav>
-
-</div>
-
-</header>
-
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-<div class="container hero-content">
-
-<h1>Luxury Bridal Makeup Studio</h1>
-
-<p>
-Experience the elegance of professional bridal beauty.  
-Bride Villa Salon specializes in premium bridal makeup, hairstyling, and skincare for your special day.
-</p>
-
-<a href="booking.html" class="btn">Book Appointment</a>
-
-</div>
-
-</section>
-
-
-<!-- ================= SERVICES PREVIEW ================= -->
-
-<section>
-
-<div class="container">
-
-<h2 class="section-title">Our Bridal Services</h2>
-
-<div class="services-grid">
-
-<div class="service-card">
-
-<img src="images/service1.jpg">
-
-<div class="service-content">
-
-<h3>Bridal Makeup</h3>
-
-<p>Luxury bridal makeup designed to make your special day unforgettable.</p>
-
-</div>
-
-</div>
-
-<div class="service-card">
-
-<img src="images/service2.jpg">
-
-<div class="service-content">
-
-<h3>Party Makeup</h3>
-
-<p>Professional makeup for parties, events, and celebrations.</p>
-
-</div>
-
-</div>
-
-<div class="service-card">
-
-<img src="images/service3.jpg">
-
-<div class="service-content">
-
-<h3>Hair Styling</h3>
-
-<p>Elegant hairstyles designed for weddings and special occasions.</p>
-
-</div>
-
-</div>
-
-<div class="service-card">
-
-<img src="images/service4.jpg">
-
-<div class="service-content">
-
-<h3>Pre-Bridal Packages</h3>
-
-<p>Complete skincare and beauty packages for brides.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section>
-
-<div class="container about">
-
-<div>
-
-<h2>About Bride Villa Salon</h2>
-
-<p>
-
-Bride Villa Salon is a luxury bridal studio dedicated to making every bride look and feel extraordinary.
-
-Our experienced makeup artists specialize in bridal transformations using premium products and modern techniques.
-
-We believe every bride deserves to shine with confidence and elegance.
-
-</p>
-
-<br>
-
-<a href="booking.html" class="btn">Book Your Appointment</a>
-
-</div>
-
-<img src="images/about.jpg">
-
-</div>
-
-</section>
-
-
-<!-- ================= TESTIMONIALS ================= -->
-
-<section class="testimonials">
-
-<div class="container">
-
-<h2 class="section-title">What Our Brides Say</h2>
-
-<div class="testimonial">
-
-<p>
-
-"Absolutely amazing service! My bridal makeup looked stunning and lasted the whole wedding.  
-Highly recommend Bride Villa Salon!"
-
-</p>
-
-<br>
-
-<strong>— Simran Kaur</strong>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= GALLERY PREVIEW ================= -->
-
-<section>
-
-<div class="container">
-
-<h2 class="section-title">Bridal Gallery</h2>
-
-<div class="gallery-grid">
-
-<img src="images/gallery1.jpg">
-<img src="images/gallery2.jpg">
-<img src="images/gallery3.jpg">
-<img src="images/gallery4.jpg">
-
-</div>
-
-<br><br>
-
-<div style="text-align:center">
-
-<a href="gallery.html" class="btn">View Full Gallery</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<p>© 2026 Bride Villa Salon</p>
-
-<p>Luxury Bridal Makeup Studio</p>
-
-<p>Phone: +91 XXXXX XXXXX</p>
-
-</footer>
-
-
-<script src="app.js"></script>
-
+<body class="luxury-theme">
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="loader">
+        <div class="loader-wrapper">
+            <h1 class="loader-logo">ORVEXA</h1>
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ORVEXA<span>STUDIO</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="booking.html" class="nav-cta">Reserve Now</a></li>
+            </ul>
+
+            <div class="burger">
+                <span class="line1"></span>
+                <span class="line2"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <header class="hero">
+                <div class="hero-media">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-bg-image"></div>
+                </div>
+
+                <div class="hero-content" data-aos="zoom-out" data-aos-duration="2500">
+                    <h2 class="hero-subtitle">BEYOND GROOMING</h2>
+                    <h1 class="hero-title">Orvexa Studio</h1>
+                    <p class="hero-tagline">Architectural precision meets bespoke luxury sanctuary.</p>
+                    
+                    <div class="hero-btns">
+                        <a href="booking.html" class="btn-primary magnetic">Request Invite</a>
+                        <a href="services.html" class="btn-outline magnetic">The Menu</a>
+                    </div>
+                </div>
+
+                <div class="scroll-indicator">
+                    <div class="mouse-icon"><div class="wheel"></div></div>
+                    <span>EXPLORE</span>
+                </div>
+            </header>
+
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-grid">
+                        <div class="about-media" data-aos="fade-right">
+                            <div class="image-mask">
+                                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80" alt="Orvexa Experience">
+                            </div>
+                        </div>
+                        <div class="about-info" data-aos="fade-left">
+                            <span class="gold-label">THE LEGACY</span>
+                            <h3>Crafting Identities</h3>
+                            <p>We believe in quiet luxury—an uncompromising commitment to detail, privacy, and artistic innovation. At Orvexa, every transformation is an act of creation.</p>
+                            <a href="services.html" class="text-link">The Collection &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="footer-wrap">
+                    <h2 class="footer-logo">ORVEXA</h2>
+                    <nav class="footer-nav">
+                        <a href="services.html">Curation</a>
+                        <a href="gallery.html">Visuals</a>
+                        <a href="booking.html">Privacy Policy</a>
+                    </nav>
+                    <p class="copyright">&copy; 2026 Orvexa Studio. Private Sanctuary.</p>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+      }
+    }
+    </script>
+
+    <script type="module" src="app.js"></script>
 </body>
-
 </html>
