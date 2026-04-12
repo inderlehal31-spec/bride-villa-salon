@@ -1,154 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Your Session | Orvexa Studio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .booking-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px;
+            background: radial-gradient(circle at top right, #1a1a1a, #0d0d0d);
+        }
 
-<title>Book Appointment | Bride Villa Salon</title>
+        .booking-card {
+            background: #111;
+            width: 100%;
+            max-width: 600px;
+            padding: 60px;
+            border: 1px solid var(--glass);
+            position: relative;
+        }
 
-<link rel="stylesheet" href="style.css">
+        .booking-card h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
 
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            color: #fff;
+            padding: 12px 0;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.4s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-bottom-color: var(--accent);
+        }
+
+        .booking-status {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            display: none; /* Hidden by default */
+        }
+
+        .success { color: #4BB543; }
+        .error { color: #ff3333; }
+    </style>
 </head>
+<body class="luxury-theme">
 
-<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-<!-- ================= NAVBAR ================= -->
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ORVEXA<span>STUDIO</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="booking.html" class="active">Reserve</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<header>
+    <div class="booking-container">
+        <div class="booking-card" data-aos="zoom-in">
+            <span class="gold-label" style="text-align: center;">APPOINTMENT</span>
+            <h2>Secure Invite</h2>
+            
+            <form id="booking-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Inder Singh" required>
+                </div>
 
-<div class="container navbar">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+91 XXXX-XXXXXX" required>
+                </div>
 
-<div class="logo">Bride Villa</div>
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select id="service">
+                        <option value="architectural-cut">Architectural Cut</option>
+                        <option value="royal-shave">The Royal Shave</option>
+                        <option value="executive-bundle">Executive Bundle</option>
+                    </select>
+                </div>
 
-<nav>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" id="date" required>
+                </div>
 
-<div class="menu-toggle" id="menu-toggle">☰</div>
+                <button type="submit" class="btn-primary magnetic" style="width: 100%; margin-top: 20px;">Confirm Reservation</button>
+            </form>
 
-<div class="nav-links" id="nav-links">
+            <div id="status-msg" class="booking-status"></div>
+        </div>
+    </div>
 
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="gallery.html">Gallery</a>
-<a href="booking.html">Booking</a>
+    <script type="module">
+        import { db } from './firebase-config.js';
+        import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-</div>
+        const bookingForm = document.getElementById('booking-form');
+        const statusMsg = document.getElementById('status-msg');
 
-</nav>
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading status
+            statusMsg.style.display = 'block';
+            statusMsg.className = 'booking-status';
+            statusMsg.innerText = 'Syncing with Orvexa Cloud...';
 
-</div>
+            const bookingData = {
+                customerName: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                appointmentDate: document.getElementById('date').value,
+                createdAt: serverTimestamp()
+            };
 
-</header>
+            try {
+                // Save to Firestore
+                const docRef = await addDoc(collection(db, "bookings"), bookingData);
+                
+                statusMsg.innerText = 'Invitation Secured. We will contact you shortly.';
+                statusMsg.classList.add('success');
+                bookingForm.reset();
 
-<!-- ================= BOOKING SECTION ================= -->
+            } catch (error) {
+                console.error("Error: ", error);
+                statusMsg.innerText = 'System error. Please try again later.';
+                statusMsg.classList.add('error');
+            }
+        });
+    </script>
 
-<section>
-
-<div class="container">
-
-<h2 class="section-title">Book Your Appointment</h2>
-
-<p style="text-align:center; margin-bottom:40px;">
-Reserve your bridal beauty session with Bride Villa Salon.
-</p>
-
-<form class="booking-form" id="bookingForm">
-
-<input
-type="text"
-id="name"
-placeholder="Full Name"
-required
->
-
-<input
-type="tel"
-id="phone"
-placeholder="Phone Number"
-required
->
-
-<input
-type="email"
-id="email"
-placeholder="Email Address"
-required
->
-
-<select id="service" required>
-
-<option value="">Select Service</option>
-<option>Bridal Makeup</option>
-<option>Party Makeup</option>
-<option>Hair Styling</option>
-<option>Pre-Bridal Package</option>
-<option>Skin Treatment</option>
-
-</select>
-
-<input
-type="date"
-id="date"
-required
->
-
-<input
-type="time"
-id="time"
-required
->
-
-<textarea
-id="message"
-rows="4"
-placeholder="Additional Message (Optional)"
-></textarea>
-
-<button class="btn" type="submit">
-
-Book Appointment
-
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-<!-- ================= CONTACT INFO ================= -->
-
-<section style="background:white; text-align:center;">
-
-<div class="container">
-
-<h2>Contact Bride Villa Salon</h2>
-
-<br>
-
-<p>📍 Luxury Bridal Studio</p>
-
-<p>📞 Phone: +91 XXXXX XXXXX</p>
-
-<p>📧 Email: bridevilla@email.com</p>
-
-</div>
-
-</section>
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<p>© 2026 Bride Villa Salon</p>
-
-<p>Luxury Bridal Makeup Studio</p>
-
-</footer>
-
-<script src="app.js"></script>
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
-
 </html>
