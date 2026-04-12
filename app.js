@@ -1,152 +1,127 @@
-/* ===============================
-   BRIDE VILLA SALON JAVASCRIPT
-================================ */
+/**
+ * ORVEXA STUDIO - Core Engine
+ * Handcrafted for High-Performance & Security
+ */
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ===============================
-   MOBILE MENU
-================================ */
+// 1. GLOBAL STATE & DEVICE DETECTION
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+window.Orvexa = window.Orvexa || {};
 
-const menuToggle = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("nav-links");
+// 2. ELITE LOADER & AOS INITIALIZATION
+const initExperience = () => {
+    const loader = document.getElementById('main-loader');
+    
+    // Simulate luxury loading time
+    setTimeout(() => {
+        if (loader) {
+            loader.style.opacity = '0';
+            // Wait for transition, then remove from DOM
+            setTimeout(() => {
+                loader.style.display = 'none';
+                document.body.style.overflow = 'visible';
+            }, 800);
+        }
 
-if(menuToggle){
+        // Trigger AOS (Animate on Scroll)
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1200,
+                easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
+                once: true,
+                offset: 100
+            });
+        }
+    }, 1200);
+};
 
-menuToggle.addEventListener("click", () => {
+window.addEventListener('DOMContentLoaded', initExperience);
 
-navLinks.classList.toggle("active");
+// 3. GPU-ACCELERATED CURSOR ENGINE (Desktop Only)
+const initCursor = () => {
+    if (isTouchDevice) return; // Exit if mobile
 
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    
+    let mouse = { x: -100, y: -100 }; // Current mouse position
+    let pos = { x: -100, y: -100 };   // Lagging follower position
+    const speed = 0.15; // Smoothness factor
+
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        
+        // Inner dot: Instant movement using translate3d (GPU)
+        cursor.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+    });
+
+    // RequestAnimationFrame for smooth 60fps movement
+    const render = () => {
+        pos.x += (mouse.x - pos.x) * speed;
+        pos.y += (mouse.y - pos.y) * speed;
+        
+        follower.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+        requestAnimationFrame(render);
+    };
+    render();
+
+    // Interaction states
+    const activeLinks = document.querySelectorAll('a, button, .magnetic');
+    activeLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            follower.style.width = '80px';
+            follower.style.height = '80px';
+            follower.style.borderColor = 'rgba(212, 175, 55, 0.5)';
+            follower.style.backgroundColor = 'rgba(212, 175, 55, 0.05)';
+        });
+        link.addEventListener('mouseleave', () => {
+            follower.style.width = '40px';
+            follower.style.height = '40px';
+            follower.style.borderColor = 'rgba(212, 175, 55, 0.15)';
+            follower.style.backgroundColor = 'transparent';
+        });
+    });
+};
+initCursor();
+
+// 4. MAGNETIC POWER LOGIC
+const initMagneticElements = () => {
+    const magneticElements = document.querySelectorAll('.magnetic');
+    
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Calculate distance from center (move 30% of distance)
+            const moveX = (e.clientX - centerX) * 0.3;
+            const moveY = (e.clientY - centerY) * 0.3;
+            
+            el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = `translate3d(0, 0, 0)`;
+        });
+    });
+};
+initMagneticElements();
+
+// 5. NAV SCROLL ADAPTATION
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
 });
 
-}
+// 6. BRAND PROTECTION & CONTEXT
+document.addEventListener('contextmenu', e => e.preventDefault()); // Anti-theft
 
-
-/* ===============================
-   STICKY NAVBAR SHADOW
-================================ */
-
-window.addEventListener("scroll", () => {
-
-const header = document.querySelector("header");
-
-if(window.scrollY > 50){
-
-header.style.boxShadow = "0 5px 15px rgba(0,0,0,0.08)";
-
-}else{
-
-header.style.boxShadow = "none";
-
-}
-
-});
-
-
-/* ===============================
-   SMOOTH SCROLLING
-================================ */
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-anchor.addEventListener('click', function (e) {
-
-e.preventDefault();
-
-document.querySelector(this.getAttribute('href')).scrollIntoView({
-
-behavior: 'smooth'
-
-});
-
-});
-
-});
-
-
-/* ===============================
-   BOOKING FORM VALIDATION
-================================ */
-
-const bookingForm = document.getElementById("bookingForm");
-
-if(bookingForm){
-
-bookingForm.addEventListener("submit", function(e){
-
-e.preventDefault();
-
-const name = document.getElementById("name").value.trim();
-const phone = document.getElementById("phone").value.trim();
-const email = document.getElementById("email").value.trim();
-const service = document.getElementById("service").value;
-const date = document.getElementById("date").value;
-const time = document.getElementById("time").value;
-
-if(name === "" || phone === "" || email === "" || service === "" || date === "" || time === ""){
-
-alert("Please fill all required fields.");
-
-return;
-
-}
-
-const phonePattern = /^[0-9]{10}$/;
-
-if(!phonePattern.test(phone)){
-
-alert("Please enter a valid 10-digit phone number.");
-
-return;
-
-}
-
-const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
-if(!emailPattern.test(email)){
-
-alert("Please enter a valid email address.");
-
-return;
-
-}
-
-alert("Appointment booked successfully! We will contact you soon.");
-
-bookingForm.reset();
-
-});
-
-}
-
-
-/* ===============================
-   GALLERY SCROLL ANIMATION
-================================ */
-
-const galleryImages = document.querySelectorAll(".gallery-grid img");
-
-const observer = new IntersectionObserver(entries => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting){
-
-entry.target.style.opacity = "1";
-entry.target.style.transform = "translateY(0)";
-
-}
-
-});
-
-});
-
-
-galleryImages.forEach(img => {
-
-img.style.opacity = "0";
-img.style.transform = "translateY(40px)";
-img.style.transition = "all 0.6s ease";
-
-observer.observe(img);
-
-});
+console.log("ORVEXA Engine Build 2.0: Locked & Operational.");
