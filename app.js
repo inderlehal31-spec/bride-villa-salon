@@ -1,127 +1,188 @@
-/**
- * ORVEXA STUDIO - Core Engine
- * Handcrafted for High-Performance & Security
- */
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// 1. GLOBAL STATE & DEVICE DETECTION
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-window.Orvexa = window.Orvexa || {};
-
-// 2. ELITE LOADER & AOS INITIALIZATION
-const initExperience = () => {
-    const loader = document.getElementById('main-loader');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Collection | Orvexa Studio</title>
     
-    // Simulate luxury loading time
-    setTimeout(() => {
-        if (loader) {
-            loader.style.opacity = '0';
-            // Wait for transition, then remove from DOM
-            setTimeout(() => {
-                loader.style.display = 'none';
-                document.body.style.overflow = 'visible';
-            }, 800);
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Specific Styles for Services Page */
+        .services-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(13,13,13,0.8), var(--primary)),
+                        url('https://images.unsplash.com/photo-1512690196222-7c7d299002e6?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
         }
 
-        // Trigger AOS (Animate on Scroll)
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 1200,
-                easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
-                once: true,
-                offset: 100
-            });
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: -100px; /* Overlap effect for luxury look */
+            position: relative;
+            z-index: 10;
         }
-    }, 1200);
-};
 
-window.addEventListener('DOMContentLoaded', initExperience);
+        .service-card {
+            background: #151515;
+            padding: 50px;
+            border: 1px solid var(--glass);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
 
-// 3. GPU-ACCELERATED CURSOR ENGINE (Desktop Only)
-const initCursor = () => {
-    if (isTouchDevice) return; // Exit if mobile
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease);
+            transform-origin: right;
+        }
 
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
-    
-    let mouse = { x: -100, y: -100 }; // Current mouse position
-    let pos = { x: -100, y: -100 };   // Lagging follower position
-    const speed = 0.15; // Smoothness factor
+        .service-card:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
 
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        
-        // Inner dot: Instant movement using translate3d (GPU)
-        cursor.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
-    });
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: #1a1a1a;
+            border-color: rgba(212, 175, 55, 0.3);
+        }
 
-    // RequestAnimationFrame for smooth 60fps movement
-    const render = () => {
-        pos.x += (mouse.x - pos.x) * speed;
-        pos.y += (mouse.y - pos.y) * speed;
-        
-        follower.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-        requestAnimationFrame(render);
-    };
-    render();
+        .service-price {
+            font-family: var(--font-serif);
+            color: var(--accent);
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 20px;
+        }
 
-    // Interaction states
-    const activeLinks = document.querySelectorAll('a, button, .magnetic');
-    activeLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            follower.style.width = '80px';
-            follower.style.height = '80px';
-            follower.style.borderColor = 'rgba(212, 175, 55, 0.5)';
-            follower.style.backgroundColor = 'rgba(212, 175, 55, 0.05)';
-        });
-        link.addEventListener('mouseleave', () => {
-            follower.style.width = '40px';
-            follower.style.height = '40px';
-            follower.style.borderColor = 'rgba(212, 175, 55, 0.15)';
-            follower.style.backgroundColor = 'transparent';
-        });
-    });
-};
-initCursor();
+        .service-card h4 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
 
-// 4. MAGNETIC POWER LOGIC
-const initMagneticElements = () => {
-    const magneticElements = document.querySelectorAll('.magnetic');
-    
-    magneticElements.forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            // Calculate distance from center (move 30% of distance)
-            const moveX = (e.clientX - centerX) * 0.3;
-            const moveY = (e.clientY - centerY) * 0.3;
-            
-            el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-        });
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
 
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = `translate3d(0, 0, 0)`;
-        });
-    });
-};
-initMagneticElements();
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
 
-// 5. NAV SCROLL ADAPTATION
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 80) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
+        .service-features li {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
 
-// 6. BRAND PROTECTION & CONTEXT
-document.addEventListener('contextmenu', e => e.preventDefault()); // Anti-theft
+        .service-features li::before {
+            content: "—";
+            margin-right: 10px;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body class="luxury-theme">
 
-console.log("ORVEXA Engine Build 2.0: Locked & Operational.");
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <nav class="navbar scrolled"> <div class="nav-container">
+            <a href="index.html" class="logo">ORVEXA<span>STUDIO</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="booking.html" class="nav-cta">Reserve</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="services-hero">
+        <div class="container" data-aos="fade-up">
+            <span class="gold-label">THE MENU</span>
+            <h1 class="hero-title">Signature Experience</h1>
+        </div>
+    </header>
+
+    <section class="services-list">
+        <div class="container">
+            <div class="service-grid">
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="service-price">$85+</span>
+                    <h4>Architectural Cut</h4>
+                    <p>A precision-engineered haircut tailored to your facial structure and hair growth patterns.</p>
+                    <ul class="service-features">
+                        <li>Consultation & Analysis</li>
+                        <li>Signature Wash</li>
+                        <li>Structural Sculpting</li>
+                        <li>Elite Finish</li>
+                    </ul>
+                    <a href="booking.html" class="btn-primary magnetic" style="padding: 15px 30px; font-size: 0.6rem;">Book Now</a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="service-price">$60+</span>
+                    <h4>The Royal Shave</h4>
+                    <p>Traditional straight-razor shave featuring hot towel therapy and premium apothecary oils.</p>
+                    <ul class="service-features">
+                        <li>Hot Towel Prep</li>
+                        <li>Straight Razor Precision</li>
+                        <li>Post-Shave Massage</li>
+                        <li>Cold Compress Finish</li>
+                    </ul>
+                    <a href="booking.html" class="btn-primary magnetic" style="padding: 15px 30px; font-size: 0.6rem;">Book Now</a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <span class="service-price">$150+</span>
+                    <h4>Executive Bundle</h4>
+                    <p>The ultimate grooming package for the modern visionary. Full transformation service.</p>
+                    <ul class="service-features">
+                        <li>Master Sculpting</li>
+                        <li>Beard Architecture</li>
+                        <li>Skin Detox Treatment</li>
+                        <li>Private Suite Access</li>
+                    </ul>
+                    <a href="booking.html" class="btn-primary magnetic" style="padding: 15px 30px; font-size: 0.6rem;">Book Now</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-wrap">
+            <h2 class="footer-logo">ORVEXA</h2>
+            <p class="copyright">&copy; 2026 Orvexa Studio. Private Sanctuary.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
